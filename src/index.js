@@ -6,6 +6,8 @@ import bodyParser from 'body-parser'
 import routes from './api/routes/index'
 import config from './config.json'
 import dbInit from './db/index'
+import Usuario from './db/models/usuario.model'
+import jwt from 'jsonwebtoken'
 
 let app = express()
 
@@ -22,7 +24,12 @@ app.use(cors({
 app.use(bodyParser.json({
 	limit : config.bodyLimit
 }))
-
+//auth middleware
+app.use(function (req, res, next) {
+	if (req.headers && req.headers.authorization && req.headers.authorization.split('	')[0] === 'JWT') {
+		jwt.verify(req.headers.authorization.split('	')[1])
+	}
+})
 
 app.use('/api', routes)
 
