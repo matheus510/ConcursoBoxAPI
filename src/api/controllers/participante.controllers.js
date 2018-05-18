@@ -1,4 +1,7 @@
 import Participante from '../../db/models/participante.model'
+import aws from 'aws-sdk'
+
+let s3 = new aws.S3()
 
 export function create(req, res) {
 
@@ -11,25 +14,25 @@ export function create(req, res) {
 	// Criar participante
 	const participanteObj = new Participante({
 		nome: req.body.nome,
-    cpf: req.body.cpf,
-    cep: req.body.cep,
-    telefone: req.body.telefone,
-    redesSociais: req.body.redesSociais,
-    envios: req.body.envios
+		cpf: req.body.cpf,
+		cep: req.body.cep,
+		telefone: req.body.telefone,
+		redesSociais: req.body.redesSociais,
+		envios: req.body.envios
 	})
-	// Salvar particiopante
+	// Salvar participante
 	participanteObj.save()
 		.then(data => {
 			res.send(data)
 		}).catch(err => {
 			res.status(500).send({
-				message: err.message || "Erro ao criar o particiopante."
+				message: err.message || "Erro ao criar o participante."
 			})
 		})
 }
 
 export function findAll(req, res) {
-	// Salvar particiopante
+	// Salvar participante
 	Participante.find()
 		.then(data => {
 			res.send(data)
