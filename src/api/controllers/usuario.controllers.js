@@ -1,14 +1,47 @@
 import Usuario from '../../db/models/usuario.model'
-import mongoose from 'mongoose'
-import bcrypt from 'bcrypt'
-import jwt from 'jsonwebtoken'
 
 export function create(req, res) {
-	
+	console.log(req.body)
+	let newUser = {
+		nome: req.body.token.split("@")[0],
+		hash_password: req.body.token.split("@")[1],
+		token: req.body.token
+	}
+	console.log(newUser)
+	let data = new Usuario(newUser)
+	data.save().then(data => {
+		res.send(data);
+	}).catch(err => {
+		res.status(500).send({
+			message: err.message || "Erro ao criar o concurso."
+		})
+	})
+}
+
+export function login(req, res) {
+	const token = req.headers['authorization'].split("@")
+	const queryObj = { 
+		'nome': token[0],
+		'hash_password': token[1] 
+	}
+	console.log(queryObj)
+	const query = Usuario.find(queryObj)
+
+	query.exec(query, function (err, usuario) {
+		if (err) {
+			//handle query error
+			console.log('erro na query')
+		} else {
+			const responseObj = {
+				authorized: true,
+				usuario: usuario[0]
+			}
+			res.send(responseObj)
+		}
+	})
 }
 
 export function findAll(req, res) {
-	// Salvar usuario
 	Usuario.find()
 	.then(data => {
 		res.send(data)
@@ -70,42 +103,4 @@ export function remove (req, res) {
 			message: "Could not delete usuario with id " + req.params.usuarioId
 		})
 	})
-}
-
-export function register (req, res) {
-	var newUsuario = new Usuario(req.body)
-	newUsuario.hash_password = bcrypt.hashSync(req.body.password, 10)
-	newUsuario.save(function(err, user) {
-		if (err) {
-			return res.status(400).send({
-				message: err
-			})
-		} else {
-			user.hash_password = undefined
-			return res.json(user)
-		}
-	})
-}
-export function sign_in (req, res) {
-	Usuario.findOne({
-		email: req.body.email
-	}, function(err, user) {
-		if (err) throw err
-		if (!user) {
-			res.status(401).json({ message: 'Authentication failed. User not found.' })
-		} else if (user) {
-			if (!user.comparePassword(req.body.password)) {
-				res.status(401).json({ message: 'Authentication failed. Wrong password.' })
-			} else {
-				return res.json({token: jwt.sign({ email: user.email, fullName: user.fullName, _id: user._id}, 'RESTFULAPIs')})
-			}
-		}
-	})
-}
-export function loginRequired (req, res, next) {
-	if (req.user) {
-		next()
-	} else {
-		return res.status(401).json({ message: 'Unauthorized user!' })
-	}
 }

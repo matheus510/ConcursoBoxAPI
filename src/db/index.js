@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
 
-const connectionString = 'mongodb://admin:admin@ds038319.mlab.com:38319/mylearning'
+const connectionString = 'mongodb://proto-concursos:proto-concursos@ds163689.mlab.com:63689/concursos-box'
 
 export default function () {
   return mongoose.connect(connectionString).then(() => {

@@ -1,13 +1,15 @@
 import { Router } from 'express'
 import * as usuarioController from '../controllers/usuario.controllers'
 
-let api = Router()
+const api = Router()
 
 api.get('/', usuarioController.findAll)
 
-api.get('/:usuarioId', usuarioController.findOne)
-
 api.post('/', usuarioController.create)
+
+api.get('/login', usuarioController.login)
+
+api.get('/:usuarioId', usuarioController.findOne)
 
 api.put('/:usuarioId', usuarioController.update)
 

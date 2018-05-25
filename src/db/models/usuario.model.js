@@ -1,5 +1,4 @@
 import mongoose from 'mongoose'
-import bcrypt from 'bcrypt'
 
 let Schema = mongoose.Schema;
 
@@ -8,11 +7,11 @@ let UsuarioSchema = new Schema({
     type: String,
     required: true
   },
-  email: {
-    type: String,
-    required: true
-  },
   hash_password: {
+    type: String,
+    required: false
+  },
+  token: {
     type: String,
     required: true
   },
@@ -21,9 +20,5 @@ let UsuarioSchema = new Schema({
     default: Date.now
   }
 })
-
-UsuarioSchema.methods.comparePassword = function (password) {
-  return bcrypt.compareSync(password, this.hash_password)
-}
 
 export default mongoose.model('Usuario', UsuarioSchema);
