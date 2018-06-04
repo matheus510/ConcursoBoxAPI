@@ -1,7 +1,6 @@
 import Concurso from '../../db/models/concurso.model'
 
 export function create(req, res) {
-	console.log('foi pro controller');
 	// Validate request
 	if (!req.body) {
 		return res.status(400).send({
@@ -11,11 +10,11 @@ export function create(req, res) {
 	// Criar concurso
 	const concursoObj = new Concurso({
 		nome: req.body.nome,
-		logoUrl: req.body.logoUrl,
-		regulamentoUrl: req.body.regulamentoUrl,
-		camposCadastro: req.body.camposCadastro,
-		camposConcurso: req.body.camposConcurso,
-		layout: req.body.layout
+		realizadores: req.body.realizadores,
+		patrocinadores: req.body.patrocinadores,
+		dataInicio: req.body.dataInicio,
+		dataTermino: req.body.dataTermino,
+		participantes: req.body.participantes
 	});
 	// Salvar concurso
 	concursoObj.save()
@@ -32,7 +31,18 @@ export function findAll(req, res) {
 	// Salvar concurso
 	Concurso.find()
 		.then(data => {
-			res.send(data)
+			console.log(data)
+			const resObj = data.map(concurso => {
+				return {
+					id: concurso._id,
+					nome: concurso.nome,
+					dataInicio: concurso.dataInicio,
+					dataTermino: concurso.dataTermino,
+					participantes: concurso.participantes.length
+				}
+			})
+			console.log(resObj)
+			res.send(resObj)
 		}).catch(err => {
 			res.status(500).send({
 				message: err.message || "Erro ao criar o concurso."

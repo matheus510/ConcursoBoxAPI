@@ -4,11 +4,11 @@ let Schema = mongoose.Schema;
 
 let ConcursoSchema = new Schema({
     nome: String,
-    logoUrl: String,
-    regulamentoUrl: String,
-    camposCadastro: Object,
-    camposConcurso: Object,
-    layout: Object
+    realizadores: Array,
+    patrocinadores: Array,
+    dataInicio: { type: Date },
+    dataTermino: { type: Date },
+    participantes: Array
 })
 
 export default mongoose.model('Concurso', ConcursoSchema);
