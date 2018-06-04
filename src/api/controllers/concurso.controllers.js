@@ -31,7 +31,6 @@ export function findAll(req, res) {
 	// Salvar concurso
 	Concurso.find()
 		.then(data => {
-			console.log(data)
 			const resObj = data.map(concurso => {
 				return {
 					id: concurso._id,
@@ -41,7 +40,6 @@ export function findAll(req, res) {
 					participantes: concurso.participantes.length
 				}
 			})
-			console.log(resObj)
 			res.send(resObj)
 		}).catch(err => {
 			res.status(500).send({

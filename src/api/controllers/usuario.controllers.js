@@ -1,13 +1,11 @@
 import Usuario from '../../db/models/usuario.model'
 
 export function create(req, res) {
-	console.log(req.body)
 	let newUser = {
 		nome: req.body.token.split("@")[0],
 		hash_password: req.body.token.split("@")[1],
 		token: req.body.token
 	}
-	console.log(newUser)
 	let data = new Usuario(newUser)
 	data.save().then(data => {
 		res.send(data);
@@ -24,7 +22,6 @@ export function login(req, res) {
 		'nome': token[0],
 		'hash_password': token[1] 
 	}
-	console.log(queryObj)
 	const query = Usuario.find(queryObj)
 
 	query.exec(query, function (err, usuario) {
