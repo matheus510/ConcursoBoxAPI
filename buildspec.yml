@@ -14,6 +14,11 @@ phases:
     commands:
       - echo Build completed on `date`
       - echo Starting application
+      - echo dist
+      - ls dist
+      - echo ../dist/
+      - cd .. && ls .
+
       - node dist
 artifacts:
   files:
