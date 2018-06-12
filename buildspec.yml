@@ -13,8 +13,6 @@ phases:
   post_build:
     commands:
       - echo Build completed on `date`
-      - echo Starting application
-      - node dist
 artifacts:
   files:
     - ./src/index.js
