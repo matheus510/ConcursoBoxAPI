@@ -10,6 +10,8 @@ phases:
       - echo Build started on `date`
       - echo Building...
       - npm run build
+      - echo Prestarting...
+      - npm run prestart
   post_build:
     commands:
       - echo Build completed on `date`
