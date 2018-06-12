@@ -5,7 +5,7 @@
   "main": "dist",
   "scripts": {
     "dev": "nodemon -w src --exec \"BABEL_DISABLE_CACHE=1 babel-node src --presets es2015,stage-0\"",
-    "build": "./node_modules/babel-cli/bin/babel.js src -s -D -d dist --presets es2015,stage-0",
+    "build": "sudo ./node_modules/babel-cli/bin/babel.js src -s -D -d dist --presets es2015,stage-0",
     "start": "node dist",
     "prestart": "npm run -s build",
     "test": "eslint src"
