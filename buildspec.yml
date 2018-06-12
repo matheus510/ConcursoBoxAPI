@@ -3,9 +3,8 @@ version: 0.2
 phases:
   install:
     commands:
-      - echo Installing dependencies...
-      - usermod -aG sudo docket-teste-user
-      - su - docket-teste-user
+      - echo Entering superuser...
+      - sudo su 
       - echo Installing dependencies...
       - sudo npm install
   build:
