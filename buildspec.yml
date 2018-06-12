@@ -5,6 +5,13 @@ phases:
     commands:
       - echo Installing dependencies...
       - npm install
+  pre_build:
+    commands:
+      - echo Logging in to Amazon ECR...
+      - aws --version
+      - $(aws ecr get-login --region --no-include-email --region us-east-1)
+      - REPOSITORY_URI=976968573664.dkr.ecr.us-east-1.amazonaws.com/docker-teste:latest
+      - IMAGE_TAG=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
   build:
     commands:
       - echo Build started on `date`
@@ -13,6 +20,10 @@ phases:
   post_build:
     commands:
       - echo Build completed on `date`
+      - echo Pushing the Docker images...
+      - docker push $REPOSITORY_URI:latest
+      - docker push $REPOSITORY_URI:$IMAGE_TAG
+      - echo Writing image definitions file...
+      - printf '[{"name":"docker-teste","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
 artifacts:
-  files:
-    - ./src/index.js
+  files: imagedefinitions.json
