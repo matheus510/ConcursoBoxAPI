@@ -9,14 +9,12 @@ phases:
     commands:
       - echo Build started on `date`
       - echo Building...
-      - npm run build
-      - echo Prestarting...
-      - npm run prestart
+      - npm run -s build
   post_build:
     commands:
       - echo Build completed on `date`
       - echo Starting application
-      - npm run start
+      - node dist
 artifacts:
   files:
     - ./src/index.js
