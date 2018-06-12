@@ -1,0 +1,6 @@
+[
+    {
+        "name": "teste-docker",
+        "imageUri": "976968573664.dkr.ecr.us-east-1.amazonaws.com/docker-teste:latest"
+    }
+]
