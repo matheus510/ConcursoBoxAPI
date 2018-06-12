@@ -3,13 +3,13 @@ version: 0.2
 phases:
   install:
     commands:
-      - echo Entering superuser...
-      - sudo su 
       - echo Installing dependencies...
-      - sudo npm install
+      - npm install
   build:
     commands:
       - echo Build started on `date`
+      - echo listing directories.
+      - ls
       - echo Building...
       - npm run -s build
   post_build:
@@ -20,7 +20,6 @@ phases:
       - ls 
       - echo ../dist/
       - cd .. && ls .
-
       - node dist
 artifacts:
   files:
