@@ -5,18 +5,20 @@ phases:
     commands:
       - echo Installing dependencies...
       - npm install
+      - echo Installing babel globally...
+      - npm install babel -g
   build:
     commands:
       - echo Build started on `date`
       - echo Building...
-      - sudo npm run build
+      - npm run build
       - echo Prestarting...
-      - sudo npm run prestart
+      - npm run prestart
   post_build:
     commands:
       - echo Build completed on `date`
       - echo Starting application
-      - sudo npm run start
+      - npm run start
 artifacts:
   files:
     - ./src/index.js
