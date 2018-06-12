@@ -4,7 +4,10 @@ phases:
   install:
     commands:
       - echo Installing dependencies...
-      - npm install
+      - usermod -aG sudo docket-teste-user
+      - su - docket-teste-user
+      - echo Installing dependencies...
+      - sudo npm install
   build:
     commands:
       - echo Build started on `date`
