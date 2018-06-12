@@ -1,1 +1,0 @@
-{"version":3,"sources":["../../../src/api/routes/auth.routes.js"],"names":["usuarioController","api"],"mappings":";;;;;;AAAA;;AACA;;IAAYA,iB;;;;AAEZ,IAAIC,MAAM,sBAAV;;kBAGeA,G","file":"auth.routes.js","sourcesContent":["import { Router } from 'express'\nimport * as usuarioController from '../controllers/usuario.controllers'\n\nlet api = Router()\n\n\nexport default api\n"]}

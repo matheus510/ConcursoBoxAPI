@@ -24,7 +24,7 @@ coverage
 .grunt
 
 #Ignore dist
-/dist/*
+./dist/*
 dist
 # Bower dependency directory (https://bower.io/)
 bower_components
