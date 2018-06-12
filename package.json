@@ -4,8 +4,8 @@
   "description": "Api RESTful para o ConcursoBoxAdmin",
   "main": "dist",
   "scripts": {
-    "dev": "nodemon -w src --exec \"BABEL_DISABLE_CACHE=1 babel-node src --presets es2015,stage-0\"",
-    "build": "./node_modules/babel-cli/bin/babel.js src -s -D -d dist --presets es2015,stage-0",
+    "dev": "nodemon -w src --exec \"babel-node src --presets es2015,stage-0\"",
+    "build": "chmod 744 ./node_modules/babel-cli/bin/babel.js && ./node_modules/babel-cli/bin/babel.js src -s -D -d dist --presets es2015,stage-0",
     "start": "node dist",
     "prestart": "npm run -s build",
     "test": "eslint src"
