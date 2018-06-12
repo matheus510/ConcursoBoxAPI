@@ -5,6 +5,8 @@ let api = Router()
 
 api.get('/', concursoController.findAll)
 
+api.get('/terminados', concursoController.findAllFinished)
+
 api.get('/:concursoId', concursoController.findOne)
 
 api.post('/', concursoController.create)

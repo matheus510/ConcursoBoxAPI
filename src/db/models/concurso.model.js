@@ -8,7 +8,8 @@ let ConcursoSchema = new Schema({
     patrocinadores: Array,
     dataInicio: { type: Date },
     dataTermino: { type: Date },
-    participantes: Array
+    participantes: Array,
+    terminado: Boolean
 })
 
 export default mongoose.model('Concurso', ConcursoSchema);

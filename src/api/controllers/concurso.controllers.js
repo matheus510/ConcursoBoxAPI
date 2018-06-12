@@ -14,7 +14,8 @@ export function create(req, res) {
 		patrocinadores: req.body.patrocinadores,
 		dataInicio: req.body.dataInicio,
 		dataTermino: req.body.dataTermino,
-		participantes: req.body.participantes
+		participantes: req.body.participantes,
+		terminado: req.body.terminado ? req.body.terminado : false
 	});
 	// Salvar concurso
 	concursoObj.save()
@@ -27,9 +28,31 @@ export function create(req, res) {
 		});
 }
 
+export function findAllFinished(req, res) {
+	// Salvar concurso
+	Concurso.find({ "terminado": true })
+		.then(data => {
+			const resObj = data.map(concurso => {
+				return {
+					id: concurso._id,
+					nome: concurso.nome,
+					dataInicio: concurso.dataInicio,
+					dataTermino: concurso.dataTermino,
+					participantes: concurso.participantes.length,
+					terminado: concurso.terminado ? concurso.terminado : false
+				}
+			})
+			res.send(resObj)
+		}).catch(err => {
+			res.status(500).send({
+				message: err.message || "Erro ao criar o concurso."
+			})
+		})
+}
+
 export function findAll(req, res) {
 	// Salvar concurso
-	Concurso.find()
+	Concurso.find({ "terminado": false })
 		.then(data => {
 			const resObj = data.map(concurso => {
 				return {
