@@ -15,7 +15,7 @@ phases:
       - echo Build completed on `date`
       - echo Starting application
       - echo dist
-      - ls dist
+      - ls 
       - echo ../dist/
       - cd .. && ls .
 
