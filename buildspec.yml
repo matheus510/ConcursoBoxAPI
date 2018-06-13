@@ -17,7 +17,8 @@ phases:
     commands:
       - echo Build started on `date`
       - echo Building...
-      - npm run -s build
+      - docker build -t docker-teste:$IMAGE_TAG .
+      - docker tag docker-teste:$IMAGE_TAG REPOSITORY_URI:$IMAGE_TAG 
   post_build:
     commands:
       - echo Build completed on `date`
