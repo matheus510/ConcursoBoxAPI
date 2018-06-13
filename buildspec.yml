@@ -20,6 +20,7 @@ phases:
       - npm run -s build
   post_build:
     commands:
+      - echo $REPOSITORY_URI:latest
       - echo Build completed on `date`
       - echo Pushing the Docker images...
       - sudo docker push $REPOSITORY_URI:latest
